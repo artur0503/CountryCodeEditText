@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CountryCodeEditText">
+        <attr name="isFlagEnable" format="boolean" />
+        <attr name="numberLength" format="integer"/>
+    </declare-styleable>
+</resources>
