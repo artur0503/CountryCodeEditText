@@ -15,6 +15,15 @@ buildscript {
     }
 }
 
+ext {
+    compileSdkVersion = 28
+    buildToolsVersion = "29.0.2"
+    minSdkVersion = 21
+    targetSdkVersion = compileSdkVersion
+    supportLibVersion = '25.3.0'
+}
+
+
 allprojects {
     repositories {
         google()
