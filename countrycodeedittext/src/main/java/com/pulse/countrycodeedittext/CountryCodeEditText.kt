@@ -2,10 +2,10 @@ package com.pulse.countrycodeedittext
 
 import android.content.Context
 import android.support.v7.widget.AppCompatEditText
-import android.text.Editable
 import android.text.InputType
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
+import com.google.i18n.phonenumbers.Phonenumber
 
 open class CountryCodeEditText @JvmOverloads constructor(
     context: Context,
@@ -13,14 +13,11 @@ open class CountryCodeEditText @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
-    interface TextChangeListener {
-        fun afterTextChanged(s: Editable?)
-        fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-        fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-        fun onCountryChange(country: CountryModel)
+    interface NumberChangeListener {
+        fun onCountryChange(phoneNumber: String, country: CountryModel)
     }
 
-    var textChangeListener: TextChangeListener? = null
+    var numberChangeListener: NumberChangeListener? = null
     private var countryCodeTextWatcher: CountryCodeTextWatcher? = null
 
     /**return data by editText**/

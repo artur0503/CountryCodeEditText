@@ -26,24 +26,16 @@ internal class CountryCodeTextWatcher(
         private val DEFAULT_COUNTRY = CountryModel("Unknown country", "UNKNOWN", "-1", EMPTY_FLAG)
     }
 
-    override fun afterTextChanged(s: Editable?) {
-        editText.setSelection(editText.text.toString().length)
-        if (editText.textChangeListener.isNotNull())
-            editText.textChangeListener?.afterTextChanged(s)
-    }
+    override fun afterTextChanged(s: Editable?) = editText.setSelection(editText.text.toString().length)
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        if (editText.textChangeListener.isNotNull())
-            editText.textChangeListener?.beforeTextChanged(s, start, count, after)
-    }
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int){}
+
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         editText.removeTextChangedListener(this)
         preparePlus(editText.text.toString())
         if (editText.isEnableFlag)
             prepareFlag(editText.text.toString())
         editText.addTextChangedListener(this)
-        if (editText.textChangeListener.isNotNull())
-            editText.textChangeListener?.onTextChanged(s, start, before, count)
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?) = when (keyCode) {
@@ -65,8 +57,9 @@ internal class CountryCodeTextWatcher(
             editText.isCorrectNumber = isCorrect
             editText.selectedCountry = it
             selectedFlag = it.emoji
-            if (editText.textChangeListener.isNotNull())
-                editText.textChangeListener?.onCountryChange(it)
+            val string = phone.getOnlyPhone()
+            if (editText.numberChangeListener.isNotNull())
+                editText.numberChangeListener?.onCountryChange(string, it)
         }
     }
 
